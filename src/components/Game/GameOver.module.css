@@ -1,0 +1,41 @@
+.game-over-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh; 
+    box-sizing: border-box;
+    background-color: #081c08; 
+  }  
+
+  .winner {
+    font-size: 100px;
+    color: #ffcc60;
+    text-shadow: #fff 0px 0px 7px;
+    font-family: Georgia, serif;
+    text-align: center;
+  }
+
+  .play-again-btn {
+    font-size: 30px;
+    color: #fff;
+    background-color: #ffcc60;
+    border: 4px solid #000000;
+    box-shadow: 0 0 100px #000;
+    border-radius: 20px;
+    margin-top: 60px;
+    cursor: pointer;
+    text-align: center;
+    text-shadow: #081c08 0px 0px 7px;
+    font-family: Georgia, serif;
+    height: 90px;
+    width: 200px;
+  }
+
+  .play-again-btn:hover {
+    background-color: #ffcc60;
+    color: #fff;
+    box-shadow: 0 0 100px #000;
+    height: 100px;
+    width: 210px;
+  }
