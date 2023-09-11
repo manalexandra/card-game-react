@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./PlayerSetUp.module.css";
+import { STRINGS } from "../../constants/Strings";
 
 const PlayerSetupPage = ({ onStartGame }) => {
   const [player1Name, setPlayer1Name] = useState("");
@@ -16,7 +17,7 @@ const PlayerSetupPage = ({ onStartGame }) => {
 
   const handleStartGame = () => {
     if (player1Name.trim() === "" || player2Name.trim() === "") {
-      setMessage("Please enter a name for both players.");
+      setMessage(STRINGS.ERROR_ENTER_NAME_FOR_PLAYERS);
     } else {
       onStartGame(player1Name, player2Name);
     }
@@ -25,9 +26,9 @@ const PlayerSetupPage = ({ onStartGame }) => {
   return (
     <div className={styles["start-page"]}>
       <div className={styles["start-page-container"]}>
-        <h2>Enter Player Names</h2>
+        <h2>{STRINGS.ENTER_PLAYER_NAMES}</h2>
         <div className={styles["player-name"]}>
-          <label>Player 1 Name: </label>
+          <label>{STRINGS.ENTER_PLAYER1_NAME}</label>
           <input
             type="text"
             value={player1Name}
@@ -35,7 +36,7 @@ const PlayerSetupPage = ({ onStartGame }) => {
           />
         </div>
         <div className={styles["player-name"]}>
-          <label>Player 2 Name: </label>
+          <label>{STRINGS.ENTER_PLAYER2_NAME}</label>
           <input
             type="text"
             value={player2Name}
@@ -43,7 +44,7 @@ const PlayerSetupPage = ({ onStartGame }) => {
           />
         </div>
         <button className={styles["player-name"]} onClick={handleStartGame}>
-          Start Game
+          {STRINGS.START_GAME}
         </button>
       </div>
       <div className={styles.message}>{message}</div>

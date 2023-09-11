@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+CARD GAME
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple card game application built with React that follows specific rules for gameplay. Players are dealt cards, and they take turns playing cards following certain rules until one player wins.
 
-## Available Scripts
+GAMEPLAY RULES
 
-In the project directory, you can run:
+- Shuffling Cards: The game starts with a shuffle of the deck. There are no hardcoded card values.
+- Dealing Cards: Two players are dealt 5 cards each at the beginning of the game.
+- Discard Pile: The first card in the deck after dealing becomes the top card in the discard pile.
+- Playing Cards: Players can play cards on their turn. They must play a card of the same suit or the same value as the card on top of the discard pile. For example, if the top card is a 7 of spades, a player can play a 9 of spades or a 7 of clubs.
+- Drawing Cards: If a player cannot play a card, they must draw from the deck.
 
-### `npm start`
+Special Cards (2 and 3):
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- If a 2 is played, the next player must pick up 2 cards unless they have a 2, in which case they add to the original 2, and the next player picks up 4 cards, and so on.
+- If a 3 is played, the next player must pick up 3 cards unless they have a 3, in which case they add to the original 3, and the next player picks up 6 cards, and so on.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Special Cards (4 and Ace):
 
-### `npm test`
+- If a 4 or Ace is played, the next player misses a turn unless they have a 4 or an Ace, in which case they add to the original 4 or Ace, and the next player in sequence misses 2 turns.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Winning
 
-### `npm run build`
+The game ends when one player has played all of their cards.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+GETTING STARTED
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Clone the repository to your local machine
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install the required dependencies:
 
-### `npm run eject`
+- npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Start the React application:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- npm start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Open your browser and visit http://localhost:3000 to play the game.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Running tests:
 
-## Learn More
+- npm test
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Technologies Used
+React
+HTML/CSS
