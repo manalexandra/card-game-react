@@ -33,6 +33,7 @@ const Game = ({ player1Name, player2Name }) => {
       const data = await response.json();
       setDeckId(data.deck_id);
       setFetchedDeck(true);
+      setMessage(STRINGS.DECK_IS_SHUFFLED);
     } catch (error) {
       console.error("Error fetching deck:", error);
     }
@@ -71,6 +72,7 @@ const Game = ({ player1Name, player2Name }) => {
 
       setGameStarted(true);
       setFetchedDeck(false);
+      setMessage("");
     }
   };
 

@@ -16,4 +16,5 @@ export const STRINGS = {
   IT_IS_YOUR_TURN: "It's your turn",
   IT_IS_A_DRAW: "It's a draw!",
   NO_ONE_WINS: "No one wins!",
+  DECK_IS_SHUFFLED: "The deck has been shuffled, you can deal the cards now.",
 };
