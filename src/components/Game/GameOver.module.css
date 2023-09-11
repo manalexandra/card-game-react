@@ -1,0 +1,73 @@
+.game-over-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh; 
+  box-sizing: border-box;
+  background-color: #081c08;
+}
+
+.winner {
+  font-size: 4rem;
+  color: #ffcc60;
+  text-shadow: #fff 0px 0px 7px;
+  font-family: Georgia, serif;
+  text-align: center;
+  margin: 20px; 
+}
+
+.play-again-btn {
+  font-size: 2rem; 
+  color: #fff;
+  background-color: #ffcc60;
+  border: 4px solid #000000;
+  box-shadow: 0 0 20px #000;
+  border-radius: 20px;
+  margin-top: 30px; 
+  cursor: pointer;
+  text-align: center;
+  text-shadow: #081c08 0px 0px 7px;
+  font-family: Georgia, serif;
+  height: 60px;
+  width: 160px; 
+}
+
+.play-again-btn:hover {
+  background-color: #ffcc60;
+  color: #fff;
+  box-shadow: 0 0 20px #000; 
+  height: 70px; 
+  width: 170px; 
+}
+
+.winner-gif {
+  height: 500px;
+}
+
+.draw-gif {
+  height: 500px;
+  mix-blend-mode: color-burn;
+} 
+
+@media (min-width: 768px) {
+  .winner {
+      font-size: 4rem; 
+  }
+  .play-again-btn {
+      font-size: 1.5rem; 
+      height: 60px; 
+      width: 200px; 
+  }
+  .play-again-btn:hover {
+      height: 70px; 
+      width: 220px; 
+  }
+  .winner-gif {
+    height: 300px;
+  }
+
+  .draw-gif {
+    height: 300px;
+  }
+}

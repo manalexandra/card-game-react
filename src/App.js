@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Game from "./components/Game/Game";
+import PlayerSetUp from "./components/Player/PlayerSetUp.js";
+import { useState } from "react";
 
 function App() {
+  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [player1Name, setPlayer1Name] = useState("");
+  const [player2Name, setPlayer2Name] = useState("");
+
+  const handleStartGame = (name1, name2) => {
+    setIsGameStarted(true);
+    setPlayer1Name(name1);
+    setPlayer2Name(name2);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {isGameStarted ? (
+        <Game player1Name={player1Name} player2Name={player2Name} />
+      ) : (
+        <PlayerSetUp onStartGame={handleStartGame} />
+      )}
     </div>
   );
 }
