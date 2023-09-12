@@ -21,6 +21,9 @@ const Game = ({ player1Name, player2Name }) => {
   const [winner, setWinner] = useState(null);
   const [nrOfFourtPlayed, setNrOfFourtPlayed] = useState(1);
   const [nrOfAcePlayed, setNrOfAcePlayed] = useState(1);
+  const [playOrStayTurns, setPlayOrStayTurns] = useState(false);
+  const [isDrawCardDisaled, setIsDrawCardDisaled] = useState(false);
+  const [requiredCard, setRequiredCard] = useState(null);
 
   const fetchDeck = async () => {
     try {
@@ -104,6 +107,10 @@ const Game = ({ player1Name, player2Name }) => {
       currentPlayer === player1Name ? player1Hand : player2Hand;
     const playedCard = currentPlayerHand[cardIndex];
     const lastItemIndex = discardPile.length - 1;
+    if (playedCard.value !== requiredCard && requiredCard !== null) {
+      setMessage(STRINGS.INVALID_MOVE);
+      return;
+    }
     if (
       playedCard.suit === discardPile[lastItemIndex].suit ||
       playedCard.value === discardPile[lastItemIndex].value
@@ -181,6 +188,8 @@ const Game = ({ player1Name, player2Name }) => {
       currentPlayerHasFour &&
       !nextPlayerHasFour
     ) {
+      setIsDrawCardDisaled(false);
+      setRequiredCard(null);
       if (nrOfFourtPlayed === 1) {
         if (currentPlayer === player1Name) {
           setMissTurnsPlayer2(1);
@@ -194,6 +203,7 @@ const Game = ({ player1Name, player2Name }) => {
           setMissTurnsPlayer1(nrOfFourtPlayed);
         }
       }
+      setMessage("");
       setCurrentPlayer(currentPlayer);
       return;
     } else if (
@@ -201,12 +211,18 @@ const Game = ({ player1Name, player2Name }) => {
       currentPlayerHasFour &&
       nextPlayerHasFour
     ) {
+      setMessage("");
+      setRequiredCard(playedCard.value);
+      setPlayOrStayTurns(true);
+      setIsDrawCardDisaled(true);
       setNrOfFourtPlayed((prevValue) => prevValue + 1);
     } else if (
       playedCard.value === "ACE" &&
       currentPlayerHasAce &&
       !nextPlayerHasAce
     ) {
+      setIsDrawCardDisaled(false);
+      setRequiredCard(null);
       if (nrOfAcePlayed === 1) {
         if (currentPlayer === player1Name) {
           setMissTurnsPlayer2(1);
@@ -220,6 +236,7 @@ const Game = ({ player1Name, player2Name }) => {
           setMissTurnsPlayer1(nrOfAcePlayed);
         }
       }
+      setMessage("");
       setCurrentPlayer(currentPlayer);
       return;
     } else if (
@@ -227,6 +244,10 @@ const Game = ({ player1Name, player2Name }) => {
       currentPlayerHasAce &&
       nextPlayerHasAce
     ) {
+      setMessage("");
+      setRequiredCard(playedCard.value);
+      setPlayOrStayTurns(true);
+      setIsDrawCardDisaled(true);
       setNrOfAcePlayed((prevValue) => prevValue + 1);
     }
 
@@ -234,10 +255,28 @@ const Game = ({ player1Name, player2Name }) => {
     setDrawRequired(false);
   };
 
+  const playOrStayTurnPrompt = (choice) => {
+    if (choice === "yes") {
+      setPlayOrStayTurns(false);
+      setIsDrawCardDisaled(false);
+      setRequiredCard(null);
+      if (currentPlayer === player1Name) {
+        setCurrentPlayer(player2Name);
+      } else {
+        setCurrentPlayer(player1Name);
+      }
+    } else {
+      setPlayOrStayTurns(false);
+      setIsDrawCardDisaled(true);
+    }
+  };
+
   const playNoRuledCard = (playedCard, currentPlayerHand, cardIndex) => {
     if (missTurnsPlayer1 === 1 || missTurnsPlayer2 === 1) {
       setMissTurnsPlayer1(0);
       setMissTurnsPlayer2(0);
+      setNrOfAcePlayed(1);
+      setNrOfFourtPlayed(1);
       if (currentPlayer === player1Name) {
         setCurrentPlayer(player2Name);
       } else {
@@ -327,21 +366,39 @@ const Game = ({ player1Name, player2Name }) => {
             )
           : ""}
         <h3>{player1Name}</h3>
+        <div
+          className={
+            playOrStayTurns && currentPlayer === player1Name
+              ? styles["play-card"]
+              : styles["play-card-disabled"]
+          }
+        >
+          <h3>
+            Do you want to stay the turn? If not play your {requiredCard}.
+          </h3>
+          <button
+            className={styles["choice-button"]}
+            onClick={() => playOrStayTurnPrompt("yes")}
+          >
+            Yes
+          </button>
+          <button
+            className={styles["choice-button"]}
+            onClick={() => playOrStayTurnPrompt("no")}
+          >
+            No
+          </button>
+        </div>
         <div className="player-cards">
-          {player1Hand.map(
-            (card, index) => (
-              console.log(card),
-              (
-                <img
-                  className={styles["player-cards"]}
-                  key={index}
-                  src={card.image}
-                  alt={`${card.value} of ${card.suit}`}
-                  onClick={() => playCard(index, player1Name)}
-                />
-              )
-            )
-          )}
+          {player1Hand.map((card, index) => (
+            <img
+              className={styles["player-cards"]}
+              key={index}
+              src={card.image}
+              alt={`${card.value} of ${card.suit}`}
+              onClick={() => playCard(index, player1Name)}
+            />
+          ))}
         </div>
       </div>
       <div className={styles.center}>
@@ -364,7 +421,7 @@ const Game = ({ player1Name, player2Name }) => {
             disabled={gameStarted}
             className={gameStarted ? styles["disabled-button"] : ""}
           >
-            {STRINGS.FETCH_NEW_DECK}
+            {STRINGS.SHUFFLE_THE_DECK}
           </button>
           <button
             onClick={dealInitialCards}
@@ -375,8 +432,10 @@ const Game = ({ player1Name, player2Name }) => {
           </button>
           <button
             onClick={drawCard}
-            disabled={!gameStarted}
-            className={!gameStarted ? styles["disabled-button"] : ""}
+            disabled={!gameStarted || isDrawCardDisaled}
+            className={
+              !gameStarted || isDrawCardDisaled ? styles["disabled-button"] : ""
+            }
           >
             {STRINGS.DRAW_CARD}
           </button>
@@ -392,6 +451,27 @@ const Game = ({ player1Name, player2Name }) => {
             )
           : ""}
         <h3>{player2Name}</h3>
+        <div
+          className={
+            playOrStayTurns && currentPlayer === player2Name
+              ? styles["play-card"]
+              : styles["play-card-disabled"]
+          }
+        >
+          Do you want to stay the turn? If not play your {requiredCard}.
+          <button
+            className={styles["choice-button"]}
+            onClick={() => playOrStayTurnPrompt("yes")}
+          >
+            Yes
+          </button>
+          <button
+            className={styles["choice-button"]}
+            onClick={() => playOrStayTurnPrompt("no")}
+          >
+            No
+          </button>
+        </div>
         <div className="player-cards">
           {player2Hand.map((card, index) => (
             <img

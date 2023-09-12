@@ -12,7 +12,7 @@ export const STRINGS = {
   DRAW_CARD: "Draw Card",
   DISCARD_PILE: "Discard Pile",
   START_GAME: "Start Game",
-  FETCH_NEW_DECK: "Fetch New Deck",
+  SHUFFLE_THE_DECK: "Shuffle Deck",
   IT_IS_YOUR_TURN: "It's your turn",
   IT_IS_A_DRAW: "It's a draw!",
   NO_ONE_WINS: "No one wins!",

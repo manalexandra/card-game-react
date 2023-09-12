@@ -37,7 +37,7 @@ Start the React application:
 
 Open your browser and visit http://localhost:3000 to play the game.
 
-Running tests:
+Running tests for the GameOver component:
 
 - npm test
 
