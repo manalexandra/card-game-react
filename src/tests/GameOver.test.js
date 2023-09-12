@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import GameOver from "./GameOver";
-import { STRINGS } from "../../constants/Strings";
+import GameOver from "../components/Game/GameOver";
+import { STRINGS } from "../constants/Strings";
 
 describe("GameOver Component", () => {
   it("renders with a winner", () => {
@@ -10,7 +10,7 @@ describe("GameOver Component", () => {
 
     render(
       <GameOver
-        winner="Player 1"
+        winner={player1Name}
         player1Name={player1Name}
         player2Name={player2Name}
       />

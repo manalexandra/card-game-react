@@ -4,7 +4,7 @@ import drawgif from "../assets/draw.gif";
 import { STRINGS } from "../../constants/Strings";
 
 const GameOver = ({ winner, player1Name, player2Name }) => {
-  const winningPlayerName = winner === "Player 1" ? player1Name : player2Name;
+  const winningPlayerName = winner === player1Name ? player1Name : player2Name;
 
   return (
     <div className={styles["game-over-container"]}>
