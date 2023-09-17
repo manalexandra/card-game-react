@@ -188,6 +188,7 @@ const Game = ({ player1Name, player2Name }) => {
       currentPlayerHasFour &&
       !nextPlayerHasFour
     ) {
+      setPlayOrStayTurns(false);
       setIsDrawCardDisaled(false);
       setRequiredCard(null);
       if (nrOfFourtPlayed === 1) {
@@ -221,6 +222,7 @@ const Game = ({ player1Name, player2Name }) => {
       currentPlayerHasAce &&
       !nextPlayerHasAce
     ) {
+      setPlayOrStayTurns(false);
       setIsDrawCardDisaled(false);
       setRequiredCard(null);
       if (nrOfAcePlayed === 1) {
